@@ -7,7 +7,7 @@ from moveit_commander import RobotCommander
 from moveit_msgs.msg import RobotState, DisplayRobotState, ContactInformation
 import baxter_interface
 from set_environment import main as set_environment
-from baxter_tests.msg import ContactInformationArray
+from baxter_tests.msg import ContactInformationArray # baxter_tests is a custom catkin_pkg that I made, uncomment this and all references to publishing this msg type if you don't wamt to publish contacts info
 
 DEFAULT_SV_SERVICE = "/check_state_validity"
 
@@ -65,7 +65,7 @@ if __name__ == '__main__':
     """ Preliminaries, initialize limb, set up publisher for collision checking """
     limb_name = 'right'
     limb = baxter_interface.Limb(limb_name)
-    # robot_state_collision_pub = rospy.Publisher('/robot_collision_state', DisplayRobotState, queue_size=0)
+    # robot_state_collision_pub = rospy.Publisher('/robot_collision_state', DisplayRobotState, queue_size=0) # publish robot states as part of the collision framework, not necessary
     robot_contact_pub = rospy.Publisher('/robot_collision_contacts', ContactInformationArray, queue_size=0) # publish collision contact info
     rospy.sleep(1)
 
@@ -82,7 +82,7 @@ if __name__ == '__main__':
     robot = RobotCommander()
     robot_state = robot.get_current_state()
     rs.joint_state.name = robot_state.joint_state.name
-    rs.joint_state.position = list(robot_state.joint_state.position) # filler for rest of the joint angles not found in waypoinr
+    rs.joint_state.position = list(robot_state.joint_state.position) # filler for rest of the joint angles not found in waypoint
     # ----------------------------------------------------------------------
 
     joint_name_indices = [rs.joint_state.name.index(n) for n in waypoint.keys()]
@@ -94,6 +94,7 @@ if __name__ == '__main__':
 
     # Publish collision information
 
+    # Uncomment the four lines below if you want to publish robot state 
     # drs = DisplayRobotState()
     # drs.state = rs
     # rospy.sleep(1)
