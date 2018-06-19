@@ -8,7 +8,7 @@ Performs collision detection in python for Baxter
 
 Demo-ing collision detection capabilities of the Baxter robot in python. 
 
-_state_validity_collision.py_ contains the StateValidity class which is responsible for collision detection
+_state_validity_collision.py_ contains the StateValidity class which is responsible for collision detection. Refer main scope of the script for a working example of how this thing performs collision checks.
 
 _set_environment.py_ is a helper script which will create an environment complete with collision objects for demo purposes. 
 
